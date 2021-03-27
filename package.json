@@ -1,0 +1,29 @@
+{
+  "name": "my-npm",
+  "version": "1.0.0",
+  "description": "web_api_development",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.coventry.ac.uk/abbasih3/Back-end-API.git"
+  },
+  "author": "Haider Abbasi",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-router": "0.0.1",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.13.1",
+    "koa-bodyparser": "^4.3.0",
+    "koa-router": "^10.0.0",
+    "mongodb": "^3.6.5",
+    "mongoose": "^5.12.2",
+    "passport-auth-token": "^1.0.1",
+    "promise-mysql": "^5.0.3"
+  }
+}
