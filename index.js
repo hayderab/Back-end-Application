@@ -21,14 +21,6 @@ app.use('/api/dogs',dogs);
 // app.use('/api/shelters',shelters); 
 
 
-// app.use('/api/', Welcome); 
-//  app.use(dogs.routes());
-//  app.use(shelters.routes());
-
-// app.use(users.routes()); 
-// app.use(dogs.routes());
-// app.use(shelters.routes());
-
 
 
 database();
