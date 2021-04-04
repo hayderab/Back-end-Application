@@ -23,9 +23,9 @@ router.get('/', function (req, res) {
 //@route Get api/dogs/Id
 //@desc User and employee
 //@access private
-router.get('/:id', function (req, res) {
+router.get('/:id', auth, function (req, res) {
 
-  Dodgs.findById(req.params.id)
+  Dogs.findById(req.params.id)
   .then(dogs => res.json(dogs))
   .catch(err => res.status(404).json({message: err}))
 });
@@ -48,23 +48,48 @@ const {name, type, location,avilable} = req.body;
   .catch(err => res.status(403).json({message: err}))
 })
 
+
+
 //@route Get api/dogs/update/id
 //@desc Employee
 //@access private
 //-------------------
-router.put('/update/:id', auth, authRole, function (req, res) {
-  Dogs.findById(req.params.id)
-  .then(dog => {
-      dog.name =  req.body.name, 
-      dog.type= req.body.type, 
-      dog.location = req.body.location, 
-      dog.avilable = req.body.avilable
-      dog.save()
-    .then(res.status(201).json({message: "Dog Updated"}))
-    .catch(err => res.status(400).json({message: err}))
-  })
-  //what i what to update
-    .catch(err => res.status(400).json({message: err}))
+router.put('/update/:id',auth, authRole, function (req, res) {
+    
+        Dogs.findByIdAndUpdate(req.params.id, 
+            {
+              name:     req.body.name, 
+              type:     req.body.type, 
+              location: req.body.location, 
+              avilable: req.body.avilable
+
+            },
+            {
+                useFindAndModify: false
+            }
+        )
+        .then(res.send({ message: 'Dog updated!' }))
+        .catch(err => res.status(404).json({ success: false }));
+
+
+
+
+  // if(!req.params.id){
+  //   console.log("testing......")
+  // }
+  // Dogs.findByIdAndUpdate(req.params.id)
+  // .then(dog => {
+  //     dog.name =  req.body.name, 
+  //     dog.type= req.body.type, 
+  //     dog.location = req.body.location, 
+  //     dog.avilable = req.body.avilable
+    
+  // })
+  // dog.save()
+  // .then(res.status(201).json({message: "Dog Updated"}))
+  // .catch(err => res.status(400).json({message: err}))
+  // //what i what to update
+  //   .catch(err => res.status(400).json({message: err}))
 
 });
 
