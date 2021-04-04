@@ -6,7 +6,6 @@ const Users = require('../models/users')
 const bodyParser = require("body-parser");
 const { findById, findByIdAndUpdate, findByIdAndDelete } = require('../models/users');
 const jwt = require("jsonwebtoken");
-const myauthtokne = require("../test");
 
 const auth = require("../strategies/auth_token.js")
 
@@ -55,9 +54,9 @@ Users.findOne({email})
         // saving the user
         newUsers.save()
           .then(user => {
-                 token = authtoken(user);
+                //  token = authtoken(user);
                   res.json({
-                    token, 
+                    // token, 
                     user:{
                       id: user.id,
                       firstName: user.firstName, 
