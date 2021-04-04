@@ -30,15 +30,22 @@ router.post('/', (req, res) => {
             .then(isMatch =>{
                 if(!isMatch) return res.status(400).json({message:"invalid crendentials"})
                 token = authtoken(user);
-                res.json({
-                    token,
-                    user:{
-                      id: user.id,
-                      firstName: user.firstName, 
-                      email: user.email
-                    }
-                  });
+                // res.json({
+                //     token,
+                //     user:{
+                //       id: user.id,
+                //       email: user.email
+                //     }
+                //   });
+              res.status(202)
+              .cookie('token', token, {
+                  sameSite: "strict",
+                  path: '/' , 
+                  httpOnly:true
+                  }).json({"message": "login Sucessful"})
+
             })
+
  
   });
 });
