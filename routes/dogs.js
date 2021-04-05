@@ -14,10 +14,34 @@ const authRole = require("../permissions/role");
 ///@route Get api/dogs/
 //@desc User and employee
 //@access public
-router.get('/', function (req, res) {
-  Dogs.find()
+router.get('/', async function (req, res) {
+  const {page=1 ,limit=10, name, type, avilable, location} = req.query;
+
+  await Dogs.find({
+      // name:name,
+      // $or: [
+      //   {
+      //     type:type,
+      //   },
+      //   {
+      //     name:name,
+      //   },
+      //   {
+      //     type:type,
+      //   },
+      //   {
+      //     avilable:avilable,
+      //   },
+      //   {
+      //     location:location,
+      //   }
+      // ]
+    }).limit(limit * 1).skip((page -1 )*limit)   // and operator body finishes
+
+
+
     .then(dogs => res.json(dogs))
-    .catch(err => res.status(404).json({message: err}))
+    .catch(err => res.status(404).json({message: "err"}))
 });
 
 //@route Get api/dogs/Id
