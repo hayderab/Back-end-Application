@@ -9,37 +9,32 @@ const { findById, findByIdAndUpdate, findByIdAndDelete } = require('../models/do
 const auth = require("../strategies/auth_token.js")
 const authRole = require("../permissions/role");
 
+const locRole = require("../permissions/locRole");
 
 
 ///@route Get api/dogs/
 //@desc User and employee
 //@access public
-router.get('/', async function (req, res) {
-  const {page=1 ,limit=10, name, type, avilable, location} = req.query;
-
-  await Dogs.find({
-      // name:name,
-      // $or: [
-      //   {
-      //     type:type,
-      //   },
-      //   {
-      //     name:name,
-      //   },
-      //   {
-      //     type:type,
-      //   },
-      //   {
-      //     avilable:avilable,
-      //   },
-      //   {
-      //     location:location,
-      //   }
-      // ]
+router.get('/',  function (req, res) {
+  const {page,limit, name, type, avilable, location} = req.query;
+  Dogs.find({
+        avilable:avilable,
+        $or: [
+        {
+          type:type,
+        },
+        {
+          name:name,
+        },
+        {
+          type:type,
+        },
+      
+        {
+          location:location,
+        }
+      ]
     }).limit(limit * 1).skip((page -1 )*limit)   // and operator body finishes
-
-
-
     .then(dogs => res.json(dogs))
     .catch(err => res.status(404).json({message: "err"}))
 });
@@ -78,7 +73,7 @@ const {name, type, location,avilable} = req.body;
 //@desc Employee
 //@access private
 //-------------------
-router.put('/update/:id',auth, authRole, function (req, res) {
+router.put('/update/:id',auth, authRole,locRole, function (req, res) {
     
         Dogs.findByIdAndUpdate(req.params.id, 
             {
