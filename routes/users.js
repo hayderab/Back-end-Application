@@ -28,9 +28,9 @@ router.get('/:id', function (req, res) {
 router.post('/', (req, res) => {
 
   // body data
-  const {firstName, lastName, email,sigupcode, password} = req.body;
+  const {firstName, lastName, location, email,sigupcode, password} = req.body;
   //validation
-  if(!firstName || !lastName || !email || !sigupcode || !password ){
+  if(!firstName || !lastName || !location || !email || !sigupcode || !password ){
     return res.status(400).json({message: "Please enter all feilds"});
   }
 // finding by email 
@@ -41,6 +41,7 @@ Users.findOne({email})
     const newUsers = new Users({
     firstName, 
     lastName, 
+    location,
     email,
     sigupcode, 
     password
@@ -63,8 +64,7 @@ Users.findOne({email})
                       email: user.email
                     }
                   });
-            });
-         
+            });    
       })
     })
 
