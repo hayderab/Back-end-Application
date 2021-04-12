@@ -15,36 +15,37 @@ const locRole = require("../permissions/locRole");
 ///@route Get api/dogs/
 //@desc User and employee
 //@access public
-router.get('/',  function (req, res) {
+router.get('/', async function (req, res) {
   const {page,limit, name, type, avilable, location} = req.query;
-  Dogs.find({
-        avilable:avilable,
-        $or: [
-        {
-          type:type,
-        },
-        {
-          name:name,
-        },
-        {
-          type:type,
-        },
-      
-        {
-          location:location,
-        }
-      ]
-    }).limit(limit * 1).skip((page -1 )*limit)   // and operator body finishes
+  const avilabledb = Dogs.find({avilable:avilable});
+  if(!location){
+    console.log("Oh Yahhhh..")
+    avilabledb.limit(limit * 1).skip((page -1 )*limit)   // and operator body finishes
+    .then(dogs => res.json(dogs))
+      .catch(err => res.status(404).json({message: "err"}))
+  }
+  else{
+    await Dogs.find({
+      $or:[{avilable:avilable,location:location}
+         ,{avilable:avilable,location:location, type:type},
+          {location:location}, {$or:[{location:location},{type:type}]}]
+          
+    })
+    .limit(limit * 1).skip((page -1 )*limit)   // and operator body finishes
     .then(dogs => res.json(dogs))
     .catch(err => res.status(404).json({message: "err"}))
+  }
+
 });
+
+
 
 //@route Get api/dogs/Id
 //@desc User and employee
 //@access private
-router.get('/:id', auth, function (req, res) {
+router.get('/:id', auth, async function (req, res) {
 
-  Dogs.findById(req.params.id)
+  await Dogs.findById(req.params.id)
   .then(dogs => res.json(dogs))
   .catch(err => res.status(404).json({message: err}))
 });
@@ -73,9 +74,9 @@ const {name, type, location,avilable} = req.body;
 //@desc Employee
 //@access private
 //-------------------
-router.put('/update/:id',auth, authRole,locRole, function (req, res) {
+router.put('/update/:id',auth, authRole,locRole, async function (req, res) {
     
-        Dogs.findByIdAndUpdate(req.params.id, 
+        await Dogs.findByIdAndUpdate(req.params.id, 
             {
               name:     req.body.name, 
               type:     req.body.type, 
@@ -112,7 +113,9 @@ router.put('/update/:id',auth, authRole,locRole, function (req, res) {
 
 });
 
-
+//@route DELETE api/dogs/delete/id
+//@desc Delete dogs
+//@access private
 //----------------------------------
 router.delete('/delete/:id',auth, authRole, function (req, res) {
   dogs.findByIdAndDelete(req.params.id)
