@@ -10,7 +10,12 @@ const jwt = require("jsonwebtoken");
 const auth = require("../strategies/auth_token.js")
 
 //get route
-router.get('/', function (req, res) {
+/**
+ * returning all the users
+ * @param {*} req 
+ * @param {Users} res  
+ */
+router.get('/', auth,  function (req, res) {
   Users.find()
   .then(Users => res.json(Users))
   .catch(err => res.status(404).json({message: err}))
