@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: routes/dogs.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: routes/dogs.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+var express = require('express');
+var router = express.Router();
+
+const Dogs = require('../models/dogs')
+const bodyParser = require("body-parser");
+const { findById, findByIdAndUpdate, findByIdAndDelete } = require('../models/dogs');
+
+const auth = require("../strategies/auth_token.js")
+const authRole = require("../permissions/role");
+const locRole = require("../permissions/locRole");
+
+
+///@route Get api/dogs/
+//@desc User and employee
+//@access public
+router.get('/', async function (req, res) {
+  const {page,limit, type, avilable, location} = req.query;
+  const avilabledb = Dogs.find({avilable:avilable});
+  if(!location){
+    console.log("Oh Yahhhh..")
+    avilabledb.limit(limit * 1).skip((page -1 )*limit)   // and operator body finishes
+    .then(dogs => res.json(dogs))
+      .catch(err => res.status(404).json({message: "err"}))
+  }
+  else{
+    await Dogs.find({
+      $or:[{avilable:avilable,location:location}
+         ,{avilable:avilable,location:location, type:type},
+          {location:location}, {$or:[{location:location},{type:type}]}]   
+    })
+    .limit(limit * 1).skip((page -1 )*limit)   // and operator body finishes
+    .then(dogs => res.json(dogs))
+    .catch(err => res.status(404).json({message: "err"}))
+  }
+});
+
+
+//@route Get api/dogs/Id
+//@desc User and employee
+//@access private
+router.get('/:id', auth, async function (req, res) {
+  await Dogs.findById(req.params.id)
+  .then(dogs => res.json(dogs))
+  .catch(err => res.status(404).json({message: err}))
+});
+
+//@route Get api/dogs
+//@desc Employee
+//@access private
+/**
+ * Route serving posts
+ * @module routers/users
+ * @name post/dogs
+ * @function
+ * @memberof module:routers/users~usersRouter
+ * @inner
+ * @param {string} path - Express path
+ * @param {callback} middleware - Express middleware.
+ */
+router.post('/', auth, authRole, (req, res) => {
+//  firstname, lastName, email, sigupcode = req.body;
+const {name, type, location,avilable} = req.body;
+  const newdogs = new Dogs({
+    name,
+    type, 
+    location,
+    avilable
+  });
+  newdogs.save()
+  .then(dogs => res.json(dogs))
+  .catch(err => res.status(403).json({message: err}))
+})
+
+
+
+//@route Get api/dogs/update/id
+//@desc Employee
+//@access private
+//-------------------
+router.put('/update/:id',auth, authRole,locRole, async function (req, res) {
+        await Dogs.findByIdAndUpdate(req.params.id, 
+            {
+              name:     req.body.name, 
+              type:     req.body.type, 
+              location: req.body.location, 
+              avilable: req.body.avilable
+
+            },
+            {
+                useFindAndModify: false
+            }
+        )
+        .then(res.send({ message: 'Dog updated!' }))
+        .catch(err => res.status(404).json({ success: false }));
+});
+
+//@route DELETE api/dogs/delete/id
+//@desc Delete dogs
+//@access private
+//----------------------------------
+router.delete('/delete/:id',auth, authRole, function (req, res) {
+  dogs.findByIdAndDelete(req.params.id)
+  .then(res.status(404).json({message: "deleted"}))
+ .catch(err => res.status(403).json({message: err}))
+})
+
+
+
+
+
+module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // This file will define the API route handlers for dogs
+// // We are going to parse request bodies so import koa-bodyparser
+// const bodyParser = require('body-parser');  
+// // Since we are handling dogs use a URI that begins with an appropriate path
+// const router = Router({prefix: '/api/dogs'});
+// const dogs = require('../models/dogs')
+
+
+// router.get('/', getAll);  
+// router.post('/', bodyParser(), addDog);  
+
+// router.get('/:id([0-9]{1,})', getById);
+// router.put('/:id([0-9]{1,})',  bodyParser(), updateDog);  
+// // router.del('/:id([0-9]{1,})', removeDog);  
+
+// // Now we define the handler functions used above.
+
+// async function getAll(ctx){  
+//    let dogs = await dogs.getAll(ctx);
+//    ctx.body = dogs;  
+//   }  
+  
+//   async function getById(ctx) {
+//     const id = ctx.params.id;
+//     const result = await dogs.getById(id);
+//     if (result.length) {
+//       const dog = result[0];
+//       ctx.body = dog;
+//       console.log(dog);
+//     }
+//   }
+
+
+//   async function addDog(ctx) {
+//     const body = ctx.request.body;
+//     const result = await dogs.addDog(body);
+//     if (result.affectedRows) {
+//       const id = result.insertId;
+//       ctx.status = 201;
+//       ctx.body = {dogID: id, created: true, link: `${ctx.request.path}/${id}`};
+//     }
+//   }
+  
+
+//   async function updateDog(ctx) {
+//     const id = ctx.params.id;
+//     let result = await dogs.getById(id);  // check it exists
+
+//     if (result.length) {
+//       let dog = result[0];
+//       // exclude fields that should not be updated
+//       const {dogID, shelterID, ...body} = ctx.request.body;
+//       // overwrite updatable fields with remaining body data
+//       Object.assign(dog, body);
+//       result = await dogs.updateDog(dog);
+//       if (result.affectedRows) {
+//         ctx.body = {dogID: id, updated: true, link: ctx.request.path};
+//       }
+//     }
+//   }
+  
+//   // function updateArticle(cnx, next){  
+//   //   //TODO: edit an article 
+//   //   let id = cnx.params.id;  
+//   //   let {title, fullText, date} = cnx.request.body;
+
+//   //   // for(var i = 0; i &lt;= dogs.length;  i++ ){
+//   //   //   console.log(dogs[i])
+//   //   // }
+//   //   //console.log(dogs[id].title)
+//   //   // let {title, fullText} = cnx.request.body;
+
+//   //   // console.log(dogs[id-1].title = title, dogs[id-1].fullText = fullText, dogs[id-1].date = date)
+
+//   //   if  ((id &lt; dogs.length+1))
+//   //   {
+//   //     dogs[id-1].title = title
+//   //     dogs[id-1].fullText = fullText
+//   //     dogs[id-1].date = date
+//   //     cnx.status = 201;
+//   //   }
+//   //   else{
+//   //     cnx.status = 404; 
+//   //   }
+
+//   //   // if ((id &lt; dogs.length+1) &amp;&amp; (id > 0)) {
+//   //   //   cnx.body = dogs[id-1];
+//   //   // } else {
+//   //   //   cnx.status = 404;
+//   //   // }
+//   //   // dogs.put(update);
+
+//   //   // dogs[id[1]]
+//   //   // dogs.push(newArticle);
+
+    
+//   //   //console.log(dogs[id].title=title , dogs[id].fullText=fullText)
+     
+//   // }  
+  
+//   // function removeDog(cnx, next){  
+//   //   //TODO: delete an article  
+//   //   let id = cnx.params.id;  
+
+//   //   if  ((id &lt; dogs.length+1))
+//   //   {
+//   //     dogs.pop(id);
+//   //     cnx.status = 410;
+//   //   }
+//   //   else{
+//   //     cnx.status = 404; 
+//   //   }
+
+//   // }  
+  
+//   // Finally, define the exported object when 'require'd from other scripts. 
+//   module.exports = router;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Dogs.html">Dogs</a></li><li><a href="Users.html">Users</a></li></ul><h3>Global</h3><ul><li><a href="global.html#auth">auth</a></li><li><a href="global.html#locRole">locRole</a></li><li><a href="global.html#userRole">userRole</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Fri Apr 16 2021 22:00:59 GMT+0100 (British Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
