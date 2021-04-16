@@ -8,7 +8,6 @@ const { findById, findByIdAndUpdate, findByIdAndDelete } = require('../models/do
 
 const auth = require("../strategies/auth_token.js")
 const authRole = require("../permissions/role");
-
 const locRole = require("../permissions/locRole");
 
 
@@ -16,7 +15,7 @@ const locRole = require("../permissions/locRole");
 //@desc User and employee
 //@access public
 router.get('/', async function (req, res) {
-  const {page,limit, name, type, avilable, location} = req.query;
+  const {page,limit, type, avilable, location} = req.query;
   const avilabledb = Dogs.find({avilable:avilable});
   if(!location){
     console.log("Oh Yahhhh..")
@@ -28,27 +27,24 @@ router.get('/', async function (req, res) {
     await Dogs.find({
       $or:[{avilable:avilable,location:location}
          ,{avilable:avilable,location:location, type:type},
-          {location:location}, {$or:[{location:location},{type:type}]}]
-          
+          {location:location}, {$or:[{location:location},{type:type}]}]   
     })
     .limit(limit * 1).skip((page -1 )*limit)   // and operator body finishes
     .then(dogs => res.json(dogs))
     .catch(err => res.status(404).json({message: "err"}))
   }
-
 });
-
 
 
 //@route Get api/dogs/Id
 //@desc User and employee
 //@access private
 router.get('/:id', auth, async function (req, res) {
-
   await Dogs.findById(req.params.id)
   .then(dogs => res.json(dogs))
   .catch(err => res.status(404).json({message: err}))
 });
+
 
 //@route Get api/dogs
 //@desc Employee
@@ -61,7 +57,6 @@ const {name, type, location,avilable} = req.body;
     type, 
     location,
     avilable
-
   });
   newdogs.save()
   .then(dogs => res.json(dogs))
@@ -75,7 +70,6 @@ const {name, type, location,avilable} = req.body;
 //@access private
 //-------------------
 router.put('/update/:id',auth, authRole,locRole, async function (req, res) {
-    
         await Dogs.findByIdAndUpdate(req.params.id, 
             {
               name:     req.body.name, 
@@ -90,27 +84,6 @@ router.put('/update/:id',auth, authRole,locRole, async function (req, res) {
         )
         .then(res.send({ message: 'Dog updated!' }))
         .catch(err => res.status(404).json({ success: false }));
-
-
-
-
-  // if(!req.params.id){
-  //   console.log("testing......")
-  // }
-  // Dogs.findByIdAndUpdate(req.params.id)
-  // .then(dog => {
-  //     dog.name =  req.body.name, 
-  //     dog.type= req.body.type, 
-  //     dog.location = req.body.location, 
-  //     dog.avilable = req.body.avilable
-    
-  // })
-  // dog.save()
-  // .then(res.status(201).json({message: "Dog Updated"}))
-  // .catch(err => res.status(400).json({message: err}))
-  // //what i what to update
-  //   .catch(err => res.status(400).json({message: err}))
-
 });
 
 //@route DELETE api/dogs/delete/id
