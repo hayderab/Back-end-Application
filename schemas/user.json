@@ -1,0 +1,57 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "user": {
+            "$id": "#user",
+            "title": "User",
+            "description": "Data to register a new user.",
+            "type": "object",
+            "properties": {
+                "firstName": {
+                    "type": "string",
+                    "description": "User first Name'"
+                },
+                "lastName": {
+                    "type": "string",
+                    "description": "User Last Name"
+                },
+                "location": {
+                    "type": "string",
+                    "description": "Please enter the location"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "User Email"
+                },
+                "sigupcode": {
+                    "type": "string",
+                    "default": "normaluser",
+                    "description": "please enter the sigup code"
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 8,
+                    "description": "User password"
+                },
+                "dataCreated": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "_id": {
+                    "type": "string"
+                },
+                "__v": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "firstName",
+                "lastName",
+                "location",
+                "email",
+                "password"
+            ],
+            "additionalProperties": false
+        }
+    }
+}
