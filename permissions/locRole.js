@@ -2,15 +2,12 @@
 const Users = require('../models/users')
 const Dogs = require('../models/dogs')
 
-
-
-// function doglocation(req){
-//     Dogs.findById(req.params.id ).then(dogs =>{
-//         return dogs.location 
-//     })
-// }
-
-// checking if the user has signup code to grant further permissions.
+/**
+ * allowing location based access 
+ * @param {uId} req getting user id
+ * @param {res} res permission denied
+ * @param {next} next  allow uses to modify dogs if location matches.
+ */
 function locRole(req, res, next ){
    Users.findById(req.user.id)
     .select("-password")
