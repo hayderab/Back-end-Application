@@ -5,10 +5,31 @@ var router = express.Router();
 const Dogs = require('../models/dogs')
 const bodyParser = require("body-parser");
 const { findById, findByIdAndUpdate, findByIdAndDelete } = require('../models/dogs');
-
+var multer  = require('multer')
 const auth = require("../strategies/auth_token.js")
 const authRole = require("../permissions/role");
 const locRole = require("../permissions/locRole");
+
+
+
+/**
+ * Storing image on local storage
+ */
+const storage = multer.diskStorage({
+  // referece: code obtained from npm pakage doc..
+  destination: function (req, file, cb) {
+    cb(null, "./uploads/")
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + file.originalname)
+  }
+});
+const upload = multer({ storage:storage})
+
+
+
+
+
 
 
 ///@route Get api/dogs/
@@ -49,18 +70,23 @@ router.get('/:id', auth, async function (req, res) {
 //@route Get api/dogs
 //@desc Employee
 //@access private
-router.post('/', auth, authRole, (req, res) => {
+router.post('/', auth, authRole, upload.single('imageUrl'),(req, res) => {
 //  firstname, lastName, email, sigupcode = req.body;
-const {name, type, location,avilable} = req.body;
-  const newdogs = new Dogs({
-    name,
-    type, 
-    location,
-    avilable
-  });
-  newdogs.save()
-  .then(dogs => res.json(dogs))
-  .catch(err => res.status(403).json({message: err}))
+    var path = req.file.path;
+    var path = path.replace("\\", "/");
+    // console.log(req.body.name);
+    const {name, type, location,avilable, imageUrl} = req.body;
+
+      const newdogs = new Dogs({
+        name,
+        type, 
+        location,
+        avilable,
+        imageUrl:path
+      });
+      newdogs.save()
+      .then(dogs => res.json(dogs))
+      .catch(err => res.status(403).json({message: "error adding dogs"}))
 })
 
 
@@ -75,7 +101,8 @@ router.put('/update/:id',auth, authRole,locRole, async function (req, res) {
               name:     req.body.name, 
               type:     req.body.type, 
               location: req.body.location, 
-              avilable: req.body.avilable
+              avilable: req.body.avilable,
+              imageUrl: req.body.imageUrl,
 
             },
             {
@@ -85,6 +112,29 @@ router.put('/update/:id',auth, authRole,locRole, async function (req, res) {
         .then(res.send({ message: 'Dog updated!' }))
         .catch(err => res.status(404).json({ success: false }));
 });
+
+
+// router.put('/addtofav',  async function (req, res){
+
+//    const uId = req.user._id;
+//    console.log(uId)
+//   //  const dogId = Dogs.findById(req.params.id);
+//   //  if(!dog){
+//   //    res.JSON({message:"dog doesnto exit"});
+//   //  }
+//   //  const user = await User.updateOn({_id: uId},{
+//   //    $addToSet:{
+//   //     favorites:dogId
+//   //    }
+//   //  })
+// });
+
+// router.get('/getfav',  async function (req, res){
+//   const uId = 
+//   User.findOne({id:uId}).populate("favorites").select("favorites")
+// });
+
+
 
 //@route DELETE api/dogs/delete/id
 //@desc Delete dogs
