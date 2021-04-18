@@ -3,9 +3,7 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const app =  express(); 
 const database = require("./helpers/databse.js")
-
 const users = require('./routes/users.js');
-
 const dogs = require('./routes/dogs.js');
 const shelters = require('./routes/shelters.js');
 const auth = require("./controllers/auth.js")
@@ -14,7 +12,7 @@ const auth = require("./controllers/auth.js")
 //     res.json("Welcome to DogShleter Api");
 //  }
  
-
+app.use('/uploads', express.static('uploads'))
 app.use(express.json());
 app.use(cors({origin: "http://localhost:3000", credentials: true}));
 app.use(cookieParser());
