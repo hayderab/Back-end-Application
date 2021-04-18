@@ -1,13 +1,14 @@
 
 var express = require('express');
 var router = express.Router();
-const bcrypt = require ("bcryptjs");
+const bcrypt = require("bcryptjs");
 const Users = require('../models/users')
 const bodyParser = require("body-parser");
 const { findById, findByIdAndUpdate, findByIdAndDelete } = require('../models/users');
 const jwt = require("jsonwebtoken");
 
 const auth = require("../strategies/auth_token.js")
+const Dogs = require('../models/dogs')
 
 //get route
 /**
@@ -15,87 +16,120 @@ const auth = require("../strategies/auth_token.js")
  * @param {*} req 
  * @param {Users} res  
  */
-router.get('/', auth,  function (req, res) {
+router.get('/', function (req, res) {
   Users.find()
-  .then(Users => res.json(Users))
-  .catch(err => res.status(404).json({message: err}))
+    .then(Users => res.json(Users))
+    .catch(err => res.status(404).json({ message: err }))
 });
 
-//get route
-router.get('/:id', function (req, res) {
-  Users.findById(req.params.id)
-  .then(Users => res.json(Users))
-  .catch(err => res.status(404).json({message: err}))
-});
+// get route
+// router.get('/:id', function (req, res) {
+//   Users.findById(req.params.id)
+//     .then(Users => res.json(Users))
+//     .catch(err => res.status(404).json({ message: err }))
+// });
 
 
 //-------------------
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
 
   // body data
-  const {firstName, lastName, location, email,sigupcode, password} = req.body;
+  const { firstName, lastName, location, email, sigupcode, password } = req.body;
   //validation
-  if(!firstName || !lastName || !location || !email || !sigupcode || !password ){
-    return res.status(400).json({message: "Please enter all feilds"});
+  if (!firstName || !lastName || !location || !email || !sigupcode || !password) {
+    return res.status(400).json({ message: "Please enter all feilds" });
   }
-// finding by email 
-Users.findOne({email})
-  .then(user => {
-  // checking if user alreay exists
-   if (user) return res.status(400).json({message:"User already exists"});
-    const newUsers = new Users({
-    firstName, 
-    lastName, 
-    location,
-    email,
-    sigupcode, 
-    password
-    });
-  
-    //Create salt & Hash
-    bcrypt.genSalt(10, (err, salt) => {
-      bcrypt.hash(newUsers.password, salt, (err, hash) =>{
-        if (err) throw err;
-        newUsers.password = hash;
-        // saving the user
-        newUsers.save()
-          .then(user => {
-                //  token = authtoken(user);
-                  res.json({
-                    // token, 
-                    user:{
-                      id: user.id,
-                      firstName: user.firstName, 
-                      email: user.email
-                    }
-                  });
-            });    
+  // finding by email 
+ await Users.findOne({ email })
+    .then(user => {
+      // checking if user alreay exists
+      if (user) return res.status(400).json({ message: "User already exists" });
+      const newUsers = new Users({
+        firstName,
+        lastName,
+        location,
+        email,
+        sigupcode,
+        password
+      });
+
+      //Create salt & Hash
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newUsers.password, salt, (err, hash) => {
+          if (err) throw err;
+          newUsers.password = hash;
+          // saving the user
+          newUsers.save()
+            .then(user => {
+              //  token = authtoken(user);
+              res.json({
+                // token, 
+                user: {
+                  id: user.id,
+                  firstName: user.firstName,
+                  email: user.email
+                }
+              });
+            });
+        })
       })
-    })
 
-  });
+    });
 
-
-  function authtoken(user){
-    var token = jwt.sign(
-        { id: user.id },
-         "thesecretkey", 
-         {expiresIn:3700})
-    return token;
-}
-  // const newUsers = new users({
-
-  //   FirstName: req.body.FirstName,
-  //   SecondName:req.body.lastName, 
-  //   Email:req.body.email, 
-  //   Sigupcode:req.body.sigupcode, 
-  //   PasswHash:req.body.phash, 
-
-  // });
-  // newUsers.save()
-  // .then(users => res.json(users))
-  // .catch(err => res.status(403).json({message: err}))
 })
+
+router.post('/addtofav/:id', async function (req, res) {
+      
+  // console.log(decode.id)
+  const uId = userId(req);
+  let fav = await Users.findOne({ _id: uId}).populate("favorites").select("favorites");
+  let dog = Dogs.findById(req.params.id);
+  if(!dog){
+    res.JSON({message:"dog does not exit"});
+  }
+  var dogId = req.params.id;
+  await Users.updateOne({ _id: uId }, {
+    $addToSet: {
+      favorites: dogId
+    }
+  })
+    .then(res.json({ message: "Added dogs to favourites" }))
+    .catch(err => res.status(403).json({ message: err }))
+})
+
+
+router.get('/getfav', async function (req, res){
+  const id = userId(req);
+  try{
+   const token = req.cookies.token;
+   const decode = jwt.verify(token, "thesecretkey");
+   await Users.findOne({ _id:id})
+  .populate("favorites")
+  .select("favorites")
+  .then(fav =>{
+    res.json(fav.favorites)
+  }).catch(err => res.status(404).json({ message: err }))
+  } catch(err){
+      res.json({message:"err"})
+  }
+});
+
+
+
+
+/**
+ * Getting the user Id from a cookie
+ * @param {req} req getting tooken for the cookie
+ * @returns  users Id
+ */
+function userId(req){
+  const token = req.cookies.token;
+  const decode = jwt.verify(token, "thesecretkey");
+  return decode.id
+}
+
+
+
 
 
 //-------------------
