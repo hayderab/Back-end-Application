@@ -1,14 +1,3 @@
-// // Export database connection information.
-//  // Use the environment settings or given defaults. 
-//  exports.config = { 
-//     host: process.env.DB_HOST || "localhost",
-//     port: process.env.DB_PORT || 3306, 
-//     user: process.env.DB_USER || "root", 
-//     password: process.env.DB_PASSWORD || "toor",
-//     database: process.env.DB_DATABASE || "dogs_shelter",
-//     connection_limit: 100 
-// }
-
 
 // Using Node.js `require()`
 const mongoose = require('mongoose');
