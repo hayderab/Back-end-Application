@@ -112,7 +112,7 @@
 
 
 <div class="description">
-    Access jwt token form and cookies and varify that.
+    Access jwt token from cookies and varify that.
 </div>
 
 
@@ -287,6 +287,149 @@
     
 
     
+    <h4 class="name" id="authtoken"><span class="type-signature"></span>authtoken<span class="signature">(user)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>user</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">userid</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">getting user id</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="controllers_auth.js.html">controllers/auth.js</a>, <a href="controllers_auth.js.html#line88">line 88</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    generating token and adding user id.
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="locRole"><span class="type-signature"></span>locRole<span class="signature">(req, res, next)</span><span class="type-signature"></span></h4>
     
 
@@ -434,7 +577,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="permissions_locRole.js.html">permissions/locRole.js</a>, <a href="permissions_locRole.js.html#line22">line 22</a>
+        <a href="permissions_locRole.js.html">permissions/locRole.js</a>, <a href="permissions_locRole.js.html#line11">line 11</a>
     </li></ul></dd>
     
 
@@ -459,6 +602,153 @@
 
 
 
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="userId"><span class="type-signature"></span>userId<span class="signature">(req)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Getting the user Id from a cookie
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">req</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">getting tooken for the cookie</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="routes_users.js.html">routes/users.js</a>, <a href="routes_users.js.html#line125">line 125</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    users Id
+</div>
+
+
+
+    
 
 
 
@@ -520,7 +810,7 @@
             <td class="type">
             
                 
-<span class="param-type">userId</span>
+<span class="param-type"><a href="global.html#userId">userId</a></span>
 
 
             
@@ -617,7 +907,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="permissions_role.js.html">permissions/role.js</a>, <a href="permissions_role.js.html#line12">line 12</a>
+        <a href="permissions_role.js.html">permissions/role.js</a>, <a href="permissions_role.js.html#line11">line 11</a>
     </li></ul></dd>
     
 
@@ -663,13 +953,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Dogs.html">Dogs</a></li><li><a href="Users.html">Users</a></li></ul><h3>Global</h3><ul><li><a href="global.html#auth">auth</a></li><li><a href="global.html#locRole">locRole</a></li><li><a href="global.html#userRole">userRole</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Dogs.html">Dogs</a></li><li><a href="Users.html">Users</a></li></ul><h3>Global</h3><ul><li><a href="global.html#auth">auth</a></li><li><a href="global.html#authtoken">authtoken</a></li><li><a href="global.html#locRole">locRole</a></li><li><a href="global.html#userId">userId</a></li><li><a href="global.html#userRole">userRole</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Fri Apr 16 2021 22:13:24 GMT+0100 (British Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Sat Apr 17 2021 17:24:00 GMT+0100 (British Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>
