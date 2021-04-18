@@ -22,6 +22,9 @@ const DogsSchema = new Schema({
     type: Boolean,
     required: [true, "Is dog avialble"]
   },
+  imageUrl:{
+    type: String,
+  }, 
   dateAdded: {
     type: Date,
     default: Date.now
