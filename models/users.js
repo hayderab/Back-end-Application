@@ -39,10 +39,11 @@ const userSchema = new Schema({
     description:"User password",
     minLength:[8, "Mimum password lenght is 8 characters"]
   },
-  // favorites: [{
-    // type: mongoose.Schema.Types.ObjectId,
-    // ref: "Dogs"
-  // }],
+  favorites: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "dogs",
+    required:false
+  }],
   dataCreated: {
     type: Date,
     default: Date.now
