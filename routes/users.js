@@ -16,7 +16,7 @@ const Dogs = require('../models/dogs')
  * @param {*} req 
  * @param {Users} res  
  */
-router.get('/', function (req, res) {
+router.get('/', auth,function (req, res) {
   Users.find()
     .then(Users => res.json(Users))
     .catch(err => res.status(404).json({ message: err }))
@@ -40,7 +40,7 @@ router.post('/', async (req, res) => {
     return res.status(400).json({ message: "Please enter all feilds" });
   }
   // finding by email 
- await Users.findOne({ email })
+ await Users.findOne({email})
     .then(user => {
       // checking if user alreay exists
       if (user) return res.status(400).json({ message: "User already exists" });
@@ -62,14 +62,14 @@ router.post('/', async (req, res) => {
           newUsers.save()
             .then(user => {
               //  token = authtoken(user);
-              res.json({
+              res.status(201).json({
                 // token, 
                 user: {
                   id: user.id,
                   firstName: user.firstName,
                   email: user.email
                 }
-              });
+              })
             });
         })
       })
@@ -101,8 +101,8 @@ router.post('/addtofav/:id', async function (req, res) {
 router.get('/getfav', async function (req, res){
   const id = userId(req);
   try{
-   const token = req.cookies.token;
-   const decode = jwt.verify(token, "thesecretkey");
+  //  const token = req.cookies.token;
+  //  const decode = jwt.verify(token, "thesecretkey");
    await Users.findOne({ _id:id})
   .populate("favorites")
   .select("favorites")
@@ -130,21 +130,6 @@ function userId(req){
 
 
 
-
-
-//-------------------
-// router.put('/:id', auth,  function (req, res) {
-//   const {firstName, lastName, email} = req.body;
-
-//   Users.findByIdAndUpdate(req.params.id, {
-// //what i what to update
-//     firstName, 
-//     lastName, 
-//     email,
-//  })
-//  .then(res.status(201).json({message: "User Updated"}))
-//  .catch(err => res.status(403).json({message: err}))
-// })
 
 
 // //----------------------------------
