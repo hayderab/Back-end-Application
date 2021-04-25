@@ -1,6 +1,9 @@
 
 var express = require('express');
 var router = express.Router();
+const fs = require('fs')
+const { promisify } = require('util')
+const unlinkAsync = promisify(fs.unlink)
 
 const Dogs = require('../models/dogs')
 const bodyParser = require("body-parser");
@@ -37,9 +40,9 @@ const upload = multer({ storage:storage})
 //@access public
 router.get('/', async function (req, res) {
   const {page,limit, type, avilable, location} = req.query;
+  
   const avilabledb = Dogs.find({avilable:avilable});
   if(!location){
-    console.log("Oh Yahhhh..")
     avilabledb.limit(limit * 1).skip((page -1 )*limit)   // and operator body finishes
     .then(dogs => res.json(dogs))
       .catch(err => res.status(404).json({message: "err"}))
@@ -76,7 +79,6 @@ router.post('/', auth, authRole, upload.single('imageUrl'),(req, res) => {
     var path = path.replace("\\", "/");
     // console.log(req.body.name);
     const {name, type, location,avilable, imageUrl} = req.body;
-
       const newdogs = new Dogs({
         name,
         type, 
@@ -85,7 +87,7 @@ router.post('/', auth, authRole, upload.single('imageUrl'),(req, res) => {
         imageUrl:path
       });
       newdogs.save()
-      .then(dogs => res.json(dogs))
+      .then(dogs => res.status(201).json(dogs))
       .catch(err => res.status(403).json({message: "error adding dogs"}))
 })
 
@@ -95,14 +97,25 @@ router.post('/', auth, authRole, upload.single('imageUrl'),(req, res) => {
 //@desc Employee
 //@access private
 //-------------------
-router.put('/update/:id',auth, authRole,locRole, async function (req, res) {
+router.put('/update/:id',auth, authRole,locRole,upload.single('imageUrl'), async function (req, res) {
+        var path = req.file.path;
+        var path = path.replace("\\", "/");
+
+        // const dogs  = await Dogs.findOne().select("imageUrl")
+        const prvImage  = await Dogs.findOne({_id:req.body._id}).select("imageUrl")
+        console.log(prvImage.imageUrl)
+        if(path == undefined){
+          path = prvImage.imageUrl
+        }else{
+          deleteFile(prvImage.imageUrl)
+        }
         await Dogs.findByIdAndUpdate(req.params.id, 
             {
               name:     req.body.name, 
               type:     req.body.type, 
               location: req.body.location, 
               avilable: req.body.avilable,
-              imageUrl: req.body.imageUrl,
+              imageUrl: path
 
             },
             {
@@ -112,28 +125,6 @@ router.put('/update/:id',auth, authRole,locRole, async function (req, res) {
         .then(res.send({ message: 'Dog updated!' }))
         .catch(err => res.status(404).json({ success: false }));
 });
-
-
-// router.put('/addtofav',  async function (req, res){
-
-//    const uId = req.user._id;
-//    console.log(uId)
-//   //  const dogId = Dogs.findById(req.params.id);
-//   //  if(!dog){
-//   //    res.JSON({message:"dog doesnto exit"});
-//   //  }
-//   //  const user = await User.updateOn({_id: uId},{
-//   //    $addToSet:{
-//   //     favorites:dogId
-//   //    }
-//   //  })
-// });
-
-// router.get('/getfav',  async function (req, res){
-//   const uId = 
-//   User.findOne({id:uId}).populate("favorites").select("favorites")
-// });
-
 
 
 //@route DELETE api/dogs/delete/id
@@ -146,6 +137,17 @@ router.delete('/delete/:id',auth, authRole, function (req, res) {
  .catch(err => res.status(403).json({message: err}))
 })
 
+
+function deleteFile(path){
+  fs.unlink(path, (err) => {
+    if (err) {
+      console.log("file not found")
+      return
+    }
+    console.log("file deleted")
+    return
+  })
+}
 
 
 
