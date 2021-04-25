@@ -4,12 +4,17 @@
   "description": "web_api_development",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node",
+    "test": "env-cmd ./config/test.env npx jest ",
+    "dev": "env-cmd ./config/dev.env nodemon",
     "doc": "jsdoc -c jsdoc.conf.json"
   },
   "repository": {
     "type": "git",
     "url": "https://github.coventry.ac.uk/abbasih3/Back-end-API.git"
+  },
+  "jest": {
+    "testEnviroment": "node"
   },
   "author": "Haider Abbasi",
   "license": "ISC",
@@ -24,6 +29,7 @@
     "koa": "^2.13.1",
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^10.0.0",
+    "moment": "^2.29.1",
     "mongodb": "^3.6.5",
     "mongoose": "^5.12.2",
     "mongoose-schema-jsonschema": "^1.4.4",
@@ -31,11 +37,15 @@
     "passport-auth-token": "^1.0.1",
     "promise-mysql": "^5.0.3",
     "redoc": "^2.0.0-rc.53",
+    "socket.io": "^4.0.1",
     "swagger-jsdoc": "^7.0.0-rc.6",
     "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
+    "env-cmd": "^8.0.2",
+    "jest": "^26.6.3",
     "jsdoc": "^3.6.6",
-    "jsdoc-route-plugin": "^0.1.0"
+    "jsdoc-route-plugin": "^0.1.0",
+    "supertest": "^6.1.3"
   }
 }
