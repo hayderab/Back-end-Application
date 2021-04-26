@@ -21,7 +21,7 @@ const locRole = require("../permissions/locRole");
 const storage = multer.diskStorage({
   // referece: code obtained from npm pakage doc..
   destination: function (req, file, cb) {
-    cb(null, "./uploads/")
+    cb(null, `./uploads/`)
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + file.originalname)
@@ -77,7 +77,6 @@ router.post('/', auth, authRole, upload.single('imageUrl'),(req, res) => {
 //  firstname, lastName, email, sigupcode = req.body;
     var path = req.file.path;
     var path = path.replace("\\", "/");
-    // console.log(req.body.name);
     const {name, type, location,avilable, imageUrl} = req.body;
       const newdogs = new Dogs({
         name,
@@ -92,7 +91,6 @@ router.post('/', auth, authRole, upload.single('imageUrl'),(req, res) => {
 })
 
 
-
 //@route Get api/dogs/update/id
 //@desc Employee
 //@access private
@@ -100,9 +98,8 @@ router.post('/', auth, authRole, upload.single('imageUrl'),(req, res) => {
 router.put('/update/:id',auth, authRole,locRole,upload.single('imageUrl'), async function (req, res) {
         var path = req.file.path;
         var path = path.replace("\\", "/");
-
         // const dogs  = await Dogs.findOne().select("imageUrl")
-        const prvImage  = await Dogs.findOne({_id:req.body._id}).select("imageUrl")
+        const prvImage  = await Dogs.findOne({_id:req.params.id}).select("imageUrl")
         console.log(prvImage.imageUrl)
         if(path == undefined){
           path = prvImage.imageUrl
@@ -148,8 +145,6 @@ function deleteFile(path){
     return
   })
 }
-
-
 
 
 module.exports = router;
