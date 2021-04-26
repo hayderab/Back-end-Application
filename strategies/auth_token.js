@@ -8,7 +8,7 @@ const jwt = require("jsonwebtoken");
  */
 function auth(req, res, next){
    const token = req.cookies.token;    
-    console.log(token);
+   //  console.log(token);
    //  const token = req.header('x-auth-token');
     // checking the token...
     if (!token){
@@ -20,7 +20,7 @@ function auth(req, res, next){
         const decode = jwt.verify(token, "thesecretkey"); 
         // add the user from payload. 
         req.user = decode; 
-        console.log("tokin decoding.....................")
+      //   console.log("tokin decoding.....................")
         next();
      }catch(err){
         //bad request
