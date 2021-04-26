@@ -4,18 +4,37 @@ const mongoose = require('mongoose');
 
 
 
-describe('Post new dog ', () => {
-    it('should create a new user', async () => {
+// describe('Post new dog ', () => {
+//     it('should not create a new dog', async () => {
+//       const res = await request(app)
+//         .post('/api/dogs')
+//         .send({
+//             name:"Test",
+//             type:"Bulldog", 
+//             location:"Birmingam", 
+//             avilable:"false", 
+//             imageUrl:"uploads/test"
+//         })
+//       expect(res.statusCode).toEqual(40)
+//     //   expect(res.body).toHaveProperty("user")
+//     })
+//   });
+
+
+  describe('Post new dog ', () => {
+    it('should not be able to add dog', async () => {
       const res = await request(app)
-        .post('/api/dogs')
+        .post('/api/dogs/')
+        .set('Cookie', `token=${process.env.COOKIE}`)
         .send({
             name:"Test",
             type:"Bulldog", 
-            location:"Birmingam", 
+            location:"Birmingham", 
             avilable:"false", 
             imageUrl:"uploads/test"
         })
-      expect(res.statusCode).toEqual(401)
+      expect(res.statusCode).toEqual(400)
+      // console.log(process.env.COOKIE)
     //   expect(res.body).toHaveProperty("user")
     })
   });
