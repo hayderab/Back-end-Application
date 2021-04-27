@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1619489894459" clover="3.2.0">
+  <project timestamp="1619489894459" name="All files">
+    <metrics statements="246" coveredstatements="165" conditionals="40" coveredconditionals="21" methods="59" coveredmethods="24" elements="345" coveredelements="210" complexity="0" loc="246" ncloc="246" packages="7" files="13" classes="13"/>
+    <package name="back_end_apis">
+      <metrics statements="20" coveredstatements="20" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="app.js" path="C:\Users\haide\OneDrive - Coventry University\Computer-Science-Year-3\Semeter-2\Web_Api_Development\Assignment\back_end_apis\app.js">
+        <metrics statements="20" coveredstatements="20" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="16" count="3" type="stmt"/>
+        <line num="17" count="3" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
+        <line num="19" count="3" type="stmt"/>
+        <line num="20" count="3" type="stmt"/>
+        <line num="21" count="3" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
+        <line num="25" count="3" type="stmt"/>
+        <line num="26" count="3" type="stmt"/>
+        <line num="28" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="back_end_apis.controllers">
+      <metrics statements="36" coveredstatements="23" conditionals="12" coveredconditionals="6" methods="10" coveredmethods="4"/>
+      <file name="auth.js" path="C:\Users\haide\OneDrive - Coventry University\Computer-Science-Year-3\Semeter-2\Web_Api_Development\Assignment\back_end_apis\controllers\auth.js">
+        <metrics statements="36" coveredstatements="23" conditionals="12" coveredconditionals="6" methods="10" coveredmethods="4"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="21" count="3" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
+        <line num="26" count="3" type="cond" truecount="3" falsecount="1"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="29" count="3" type="stmt"/>
+        <line num="31" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="33" count="3" type="stmt"/>
+        <line num="35" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="36" count="2" type="stmt"/>
+        <line num="37" count="2" type="stmt"/>
+        <line num="52" count="3" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="63" count="3" type="stmt"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="67" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="69" count="0" type="stmt"/>
+        <line num="73" count="0" type="stmt"/>
+        <line num="75" count="0" type="stmt"/>
+        <line num="77" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="78" count="0" type="stmt"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="83" count="0" type="stmt"/>
+        <line num="95" count="2" type="stmt"/>
+        <line num="100" count="2" type="stmt"/>
+        <line num="109" count="3" type="stmt"/>
+        <line num="110" count="0" type="stmt"/>
+        <line num="112" count="0" type="stmt"/>
+        <line num="118" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="back_end_apis.helpers">
+      <metrics statements="6" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+      <file name="databse.js" path="C:\Users\haide\OneDrive - Coventry University\Computer-Science-Year-3\Semeter-2\Web_Api_Development\Assignment\back_end_apis\helpers\databse.js">
+        <metrics statements="6" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="21" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="back_end_apis.models">
+      <metrics statements="17" coveredstatements="17" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="chat.js" path="C:\Users\haide\OneDrive - Coventry University\Computer-Science-Year-3\Semeter-2\Web_Api_Development\Assignment\back_end_apis\models\chat.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="32" count="3" type="stmt"/>
+      </file>
+      <file name="dogs.js" path="C:\Users\haide\OneDrive - Coventry University\Computer-Science-Year-3\Semeter-2\Web_Api_Development\Assignment\back_end_apis\models\dogs.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="38" count="3" type="stmt"/>
+      </file>
+      <file name="partipents.js" path="C:\Users\haide\OneDrive - Coventry University\Computer-Science-Year-3\Semeter-2\Web_Api_Development\Assignment\back_end_apis\models\partipents.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="25" count="3" type="stmt"/>
+        <line num="40" count="3" type="stmt"/>
+      </file>
+      <file name="users.js" path="C:\Users\haide\OneDrive - Coventry University\Computer-Science-Year-3\Semeter-2\Web_Api_Development\Assignment\back_end_apis\models\users.js">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="54" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="back_end_apis.permissions">
+      <metrics statements="14" coveredstatements="12" conditionals="4" coveredconditionals="2" methods="5" coveredmethods="5"/>
+      <file name="locRole.js" path="C:\Users\haide\OneDrive - Coventry University\Computer-Science-Year-3\Semeter-2\Web_Api_Development\Assignment\back_end_apis\permissions\locRole.js">
+        <metrics statements="8" coveredstatements="7" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="3"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="24" count="3" type="stmt"/>
+      </file>
+      <file name="role.js" path="C:\Users\haide\OneDrive - Coventry University\Computer-Science-Year-3\Semeter-2\Web_Api_Development\Assignment\back_end_apis\permissions\role.js">
+        <metrics statements="6" coveredstatements="5" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="15" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="17" count="3" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="24" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="back_end_apis.routes">
+      <metrics statements="143" coveredstatements="79" conditionals="22" coveredconditionals="12" methods="41" coveredmethods="13"/>
+      <file name="dogs.js" path="C:\Users\haide\OneDrive - Coventry University\Computer-Science-Year-3\Semeter-2\Web_Api_Development\Assignment\back_end_apis\routes\dogs.js">
+        <metrics statements="58" coveredstatements="40" conditionals="6" coveredconditionals="2" methods="19" coveredmethods="8"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="13" count="3" type="stmt"/>
+        <line num="14" count="3" type="stmt"/>
+        <line num="21" count="3" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="30" count="3" type="stmt"/>
+        <line num="36" count="3" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="40" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="59" count="3" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="69" count="3" type="stmt"/>
+        <line num="71" count="1" type="stmt"/>
+        <line num="72" count="1" type="stmt"/>
+        <line num="73" count="1" type="stmt"/>
+        <line num="74" count="1" type="stmt"/>
+        <line num="81" count="1" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="83" count="0" type="stmt"/>
+        <line num="88" count="3" type="stmt"/>
+        <line num="89" count="1" type="stmt"/>
+        <line num="90" count="1" type="stmt"/>
+        <line num="92" count="1" type="stmt"/>
+        <line num="93" count="1" type="stmt"/>
+        <line num="94" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="95" count="0" type="stmt"/>
+        <line num="97" count="1" type="stmt"/>
+        <line num="99" count="1" type="stmt"/>
+        <line num="113" count="0" type="stmt"/>
+        <line num="121" count="3" type="stmt"/>
+        <line num="122" count="1" type="stmt"/>
+        <line num="124" count="0" type="stmt"/>
+        <line num="135" count="1" type="stmt"/>
+        <line num="136" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="137" count="0" type="stmt"/>
+        <line num="138" count="0" type="stmt"/>
+        <line num="140" count="1" type="stmt"/>
+        <line num="141" count="1" type="stmt"/>
+        <line num="146" count="3" type="stmt"/>
+      </file>
+      <file name="messages.js" path="C:\Users\haide\OneDrive - Coventry University\Computer-Science-Year-3\Semeter-2\Web_Api_Development\Assignment\back_end_apis\routes\messages.js">
+        <metrics statements="38" coveredstatements="12" conditionals="2" coveredconditionals="0" methods="8" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="42" count="3" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="53" count="3" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="61" count="3" type="stmt"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="75" count="0" type="stmt"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="77" count="0" type="stmt"/>
+        <line num="80" count="3" type="stmt"/>
+      </file>
+      <file name="users.js" path="C:\Users\haide\OneDrive - Coventry University\Computer-Science-Year-3\Semeter-2\Web_Api_Development\Assignment\back_end_apis\routes\users.js">
+        <metrics statements="47" coveredstatements="27" conditionals="14" coveredconditionals="10" methods="14" coveredmethods="5"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="20" count="3" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="35" count="3" type="stmt"/>
+        <line num="38" count="3" type="stmt"/>
+        <line num="40" count="3" type="cond" truecount="8" falsecount="0"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="44" count="2" type="stmt"/>
+        <line num="47" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="48" count="2" type="stmt"/>
+        <line num="58" count="2" type="stmt"/>
+        <line num="59" count="2" type="stmt"/>
+        <line num="60" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="61" count="2" type="stmt"/>
+        <line num="63" count="2" type="stmt"/>
+        <line num="66" count="2" type="stmt"/>
+        <line num="82" count="3" type="stmt"/>
+        <line num="85" count="0" type="stmt"/>
+        <line num="86" count="0" type="stmt"/>
+        <line num="87" count="0" type="stmt"/>
+        <line num="88" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="89" count="0" type="stmt"/>
+        <line num="91" count="0" type="stmt"/>
+        <line num="92" count="0" type="stmt"/>
+        <line num="98" count="0" type="stmt"/>
+        <line num="102" count="3" type="stmt"/>
+        <line num="103" count="0" type="stmt"/>
+        <line num="104" count="0" type="stmt"/>
+        <line num="107" count="0" type="stmt"/>
+        <line num="111" count="0" type="stmt"/>
+        <line num="112" count="0" type="stmt"/>
+        <line num="114" count="0" type="stmt"/>
+        <line num="127" count="0" type="stmt"/>
+        <line num="128" count="0" type="stmt"/>
+        <line num="129" count="0" type="stmt"/>
+        <line num="147" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="back_end_apis.strategies">
+      <metrics statements="10" coveredstatements="9" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+      <file name="auth_token.js" path="C:\Users\haide\OneDrive - Coventry University\Computer-Science-Year-3\Semeter-2\Web_Api_Development\Assignment\back_end_apis\strategies\auth_token.js">
+        <metrics statements="10" coveredstatements="9" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="14" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
+        <line num="20" count="4" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="24" count="3" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="30" count="3" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
