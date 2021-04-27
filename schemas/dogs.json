@@ -17,9 +17,9 @@
                     "type": "string"
                 },
                 "avilable": {
-                    "type": "boolean"
+                    "type": "string"
                 },
-                "imageUrl":{
+                "imageUrl": {
                     "type": "string"
                 },
                 "dateAdded": {
