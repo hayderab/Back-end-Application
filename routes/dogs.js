@@ -30,20 +30,15 @@ const storage = multer.diskStorage({
 const upload = multer({ storage:storage})
 
 
-
-
-
-
-
 ///@route Get api/dogs/
 //@desc User and employee
 //@access public
 router.get('/', async function (req, res) {
-  const {page,limit, type, avilable, location} = req.query;
+  const {page,limit, type, avilable, location, sort} = req.query;
   
   const avilabledb = Dogs.find({avilable:avilable});
   if(!location){
-    avilabledb.limit(limit * 1).skip((page -1 )*limit)   // and operator body finishes
+    avilabledb.limit(limit * 1).skip((page -1 )*limit).sort({"dateAdded":sort})   // and operator body finishes
     .then(dogs => res.json(dogs))
       .catch(err => res.status(404).json({message: "err"}))
   }
@@ -53,16 +48,14 @@ router.get('/', async function (req, res) {
          ,{avilable:avilable,location:location, type:type},
           {location:location}, {$or:[{location:location},{type:type}]}]   
     })
-    .limit(limit * 1).skip((page -1 )*limit)   // and operator body finishes
+    .limit(limit * 1).skip((page -1 )*limit).sort({"dateAdded":sort})   // and operator body finishes
     .then(dogs => res.json(dogs))
     .catch(err => res.status(404).json({message: "err"}))
   }
 });
 
 
-//@route Get api/dogs/Id
-//@desc User and employee
-//@access private
+
 router.get('/:id', auth, async function (req, res) {
   await Dogs.findById(req.params.id)
   .then(dogs => res.json(dogs))
@@ -91,10 +84,7 @@ router.post('/', auth, authRole, upload.single('imageUrl'),(req, res) => {
 })
 
 
-//@route Get api/dogs/update/id
-//@desc Employee
-//@access private
-//-------------------
+
 router.put('/update/:id',auth, authRole,locRole,upload.single('imageUrl'), async function (req, res) {
         var path = req.file.path;
         var path = path.replace("\\", "/");
@@ -135,6 +125,12 @@ router.delete('/delete/:id',auth, authRole, function (req, res) {
 })
 
 
+
+
+/**
+ * Deleting already existing image un update..
+ * @param {path} path get image path 
+ */
 function deleteFile(path){
   fs.unlink(path, (err) => {
     if (err) {
