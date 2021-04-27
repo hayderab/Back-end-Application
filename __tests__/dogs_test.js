@@ -35,9 +35,27 @@ const mongoose = require('mongoose');
         })
       expect(res.statusCode).toEqual(400)
       // console.log(process.env.COOKIE)
-    //   expect(res.body).toHaveProperty("user")
+     //   expect(res.body).toHaveProperty("user")
     })
   });
+
+  // describe('Post new dog ', () => {
+  //   it('should be able to add dogs to fav', async () => {
+  //     const res = await request(app)
+  //       .post('/api/user/addfav')
+  //       .set('Cookie', `token=${process.env.COOKIE}`)
+  //       .send({
+  //           name:"Test",
+  //           type:"Bulldog", 
+  //           location:"Birmingham", 
+  //           avilable:"false", 
+  //           imageUrl:"uploads/test"
+  //       })
+  //     expect(res.statusCode).toEqual(404)
+  //     // console.log(process.env.COOKIE)
+  //    //   expect(res.body).toHaveProperty("user")
+  //   })
+  // });
 
   afterEach(async () => {
     // await app.close();
