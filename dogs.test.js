@@ -53,10 +53,10 @@ describe('Post new user', () => {
 let cookie;
 let id;
 
-describe('Post new user', () => {
+describe('Post existing user', () => {
     it('should login ', async () => {
       const res = await request(app)
-        .post('/api/auth')
+        .post('/api/users/login')
         .send({
           email: user.email, 
           password: user.password
@@ -70,9 +70,9 @@ describe('Post new user', () => {
         })
       });
 
-      it('should login ', async () => {
+      it('should login and sigupcode return true ', async () => {
         const res = await request(app)
-            .post('/api/auth/logedin')
+            .post('/api/users/loggedin')
             .set('Cookie', `token=${cookie}`)
             .expect('Content-Type', /json/)
             .expect({ sigupcode: true, login: true })
@@ -99,7 +99,7 @@ describe('Post new user', () => {
       })
     });
 
-    describe('Post new dog ', () => {
+    describe('Update existing dog ', () => {
       it('should be able to update dogs', async () => {
         const res = await request(app)
           .put(`/api/dogs/update/${id}`)
@@ -115,7 +115,7 @@ describe('Post new user', () => {
 
     });
 
-    describe('Post new dog ', () => {
+    describe('Delete  existing dog ', () => {
       it('should be able to delete dogs', async () => {
         const res = await request(app)
           .delete(`/api/dogs/delete/${id}`)
