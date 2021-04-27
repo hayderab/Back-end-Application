@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
+require('mongoose-schema-jsonschema')(mongoose);
 
 
-
+/**
+ * Message  schema, contains Messages
+ * @constructor Messages
+ */
 const MessageSchema = mongoose.Schema({
 
     sender: {
@@ -26,3 +30,6 @@ const MessageSchema = mongoose.Schema({
 
 // exports.partipents = mongoose.model("partipents", partipentsSchema);
 module.exports = Message = mongoose.model('Message', MessageSchema);
+
+// const jsonSchema = MessageSchema.jsonSchema();
+// console.log(jsonSchema);
