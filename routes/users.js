@@ -6,6 +6,7 @@ const Users = require('../models/users')
 const bodyParser = require("body-parser");
 const { findById, findByIdAndUpdate, findByIdAndDelete } = require('../models/users');
 const jwt = require("jsonwebtoken");
+const authRole = require("../permissions/role");
 
 const auth = require("../strategies/auth_token.js")
 const Dogs = require('../models/dogs')
@@ -16,7 +17,7 @@ const Dogs = require('../models/dogs')
  * @param {*} req 
  * @param {Users} res  
  */
-router.get('/', auth,function (req, res) {
+router.get('/', auth, authRole,function (req, res) {
   Users.find()
     .then(Users => res.json(Users))
     .catch(err => res.status(404).json({ message: err }))
@@ -78,7 +79,7 @@ router.post('/', async (req, res) => {
 
 })
 
-router.post('/addtofav/:id', async function (req, res) {
+router.post('/addtofav/:id', auth, async function (req, res) {
       
   // console.log(decode.id)
   const uId = userId(req);
@@ -98,7 +99,7 @@ router.post('/addtofav/:id', async function (req, res) {
 })
 
 
-router.get('/getfav', async function (req, res){
+router.get('/getfav', auth,  async function (req, res){
   const id = userId(req);
   try{
   //  const token = req.cookies.token;
