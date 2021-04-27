@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node",
-    "test": "env-cmd ./config/test.env npx jest ",
+    "test": "env-cmd ./config/test.env npx jest --detectOpenHandles --verbose",
     "dev": "env-cmd ./config/dev.env nodemon",
     "doc": "jsdoc -c jsdoc.conf.json"
   },
