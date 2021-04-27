@@ -1,0 +1,47 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "messages": {
+            "$id": "#messages",
+            "title": "Messages",
+            "description": "Store messages",
+            "type": "object",
+            "properties": {
+                "sender": {
+                    "type": "string",
+                    "x-ref": "users",
+                    "description": "Refers to users",
+                    "pattern": "^[0-9a-fA-F]{24}$"
+                },
+                "messsageid": {
+                    "type": "string",
+                    "x-ref": "partipents",
+                    "description": "Refers to partipents",
+                    "pattern": "^[0-9a-fA-F]{24}$"
+                },
+                "text": {
+                    "type": "string",
+                    "maxLength": 200
+                },
+                "_id": {
+                    "type": "string",
+                    "pattern": "^[0-9a-fA-F]{24}$"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "__v": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "text"
+            ]
+        }
+    }
+}
