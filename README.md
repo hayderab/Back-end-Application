@@ -2,10 +2,10 @@
 
 
 
-# Test enviroment
-npm run test
+To run the test enviroment
+## `npm run test`
 
-# Dev Enviroment
-npm run dev
+Runnning Dev Enviroment
+## `npm run dev`
 
 
