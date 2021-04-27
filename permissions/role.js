@@ -4,9 +4,9 @@ const Users = require('../models/users')
 
 /**
  * Checking if the user has signup code to grant further permissions.
- * @param {userId} req getting user id.
- * @param {permission} res permission denied if user doesnot have sigup code
- * @param {next} next    allow uers to modify dogs if code matches
+ * @param {Object} req getting user id.
+ * @param {Object} res permission denied if user doesnot have sigup code
+ * @param {Function} next    allow uers to modify dogs if code matches
  */
 function userRole(req, res, next ){
     Users.findById(req.user.id)

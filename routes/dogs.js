@@ -9,7 +9,9 @@ const Dogs = require('../models/dogs')
 const bodyParser = require("body-parser");
 const { findById, findByIdAndUpdate, findByIdAndDelete } = require('../models/dogs');
 var multer  = require('multer')
+
 const auth = require("../strategies/auth_token.js")
+
 const authRole = require("../permissions/role");
 const locRole = require("../permissions/locRole");
 
@@ -90,7 +92,6 @@ router.put('/update/:id',auth, authRole,locRole,upload.single('imageUrl'), async
         var path = path.replace("\\", "/");
         // const dogs  = await Dogs.findOne().select("imageUrl")
         const prvImage  = await Dogs.findOne({_id:req.params.id}).select("imageUrl")
-        console.log(prvImage.imageUrl)
         if(path == undefined){
           path = prvImage.imageUrl
         }else{
@@ -134,10 +135,10 @@ router.delete('/delete/:id',auth, authRole, function (req, res) {
 function deleteFile(path){
   fs.unlink(path, (err) => {
     if (err) {
-      console.log("file not found")
+      // console.log("file not found")
       return
     }
-    console.log("file deleted")
+    // console.log("file deleted")
     return
   })
 }

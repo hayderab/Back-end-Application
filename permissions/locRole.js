@@ -4,9 +4,9 @@ const Dogs = require('../models/dogs')
 
 /**
  * allowing location based access 
- * @param {uId} req getting user id
- * @param {res} res permission denied
- * @param {next} next  allow uses to modify dogs if location matches.
+ * @param {Object} req getting user id
+ * @param {Object} res permission denied
+ * @param {Function} next  allow uses to modify dogs if location matches.
  */
 function locRole(req, res, next ){
    Users.findById(req.user.id)
