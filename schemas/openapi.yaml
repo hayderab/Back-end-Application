@@ -44,6 +44,8 @@ paths:
             application/json:
               schema:
               $ref: ./user.json#/definitions/userUpdated
+        '400':
+          description: User already exists
     get:
       tags:
         - Users
@@ -120,7 +122,33 @@ paths:
           description: Only admin users can delete accounts
         '404':
           description: Not found
-  
+
+  /users/login:
+    summary: login user
+    description: >
+      This resource represents an individual user in the system.
+      Each user is identified by a numeric id.
+    post:
+      tags:
+        - Users
+      description:
+        Login registered user.
+      requestBody:
+        description: All new user data.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - email
+                - password 
+
   /users/addtofav/{id}:
     parameters:
       - in: path
@@ -183,18 +211,6 @@ paths:
     description: >
       This resource represents an individual user in the system.
       Each user is identified by a numeric `id`.
-    get:
-      tags:
-        - Dogs
-      description:
-        Get a list of all dogs.
-      responses:
-        '200':
-          description: List of dogs
-          content:
-            application/json:
-              schema:
-                $ref:./dogs.json#/definitions/dogsList    
     post:
       tags:
         - Dogs
@@ -206,15 +222,45 @@ paths:
         content:
           application/json:
             schema:
-              $ref:./dogs.json#/definitions/dogs
+              $ref: ./dogs.json#/definitions/dogs
       responses:
-        '200':
-          description: List of dogs
-          content:
-            application/json:
-              schema:
-                $ref:./dogs.json#/definitions/userList  
- 
+        '201':
+          description:
+            Dog created
+        '403':
+          description:
+            Error adding dog
+    get:
+      tags:
+        - Dogs
+      description:
+        Get user by id.
+      parameters:
+        - in: query
+          name: isAvailable
+          schema:
+            type: true or flase
+          required: false
+        - in: query
+          name: location
+          schema:
+            type: String
+          required: false
+        - in: query
+          name: Type
+          schema:
+            type: String
+          required: false
+        - in: query
+          name: Limit
+          schema:
+            type: String
+          required: false
+        - in: query
+          name: page
+          schema:
+            type: Integer
+          required: false
   /dogs/update/{id}:
     parameters:
       - in: path
@@ -229,12 +275,12 @@ paths:
       description:
         Update dogs by id.
       requestBody:
-        description: All dogs data.
+        description: Update dog info.
         required: true
         content:
             application/json:
               schema:
-                $ref:./dogs.json#/definitions/dogs  
+              $ref: ./dogs.json#/definitions/dogs
       responses:
         '200':
           description: View of user record
