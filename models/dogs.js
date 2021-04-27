@@ -19,7 +19,7 @@ const DogsSchema = new Schema({
     required: [true, "Location required"]
   },
   avilable: {
-    type: Boolean,
+    type: String,
     required: [true, "Is dog avialble"]
   },
   imageUrl:{
