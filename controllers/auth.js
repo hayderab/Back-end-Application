@@ -11,6 +11,13 @@ const { findById, findByIdAndUpdate, findByIdAndDelete } = require('../models/us
 
 const auth = require("../strategies/auth_token.js")
 
+
+/**
+ * authentication route 
+ * @param {Json} req get user email and password
+ * @param {Json} res send userId along with sigupcode.
+ * @returns 
+ */
 router.post('/', async (req, res) => {
   // body data
   const { email, password } = req.body;
@@ -41,6 +48,7 @@ router.post('/', async (req, res) => {
     });
 });
 
+
 router.get("/logout", (req, res) => {
   res.clearCookie('token').json({ message: "cookie deleted" })
 })
@@ -54,7 +62,6 @@ router.get("/logout", (req, res) => {
  */
 router.post("/logedin",async (req, res) => {
   // get the token from the cookie. 
-  // console.log(role);
   const token = req.cookies.token;
   // checking the token...
   if (!token) {
@@ -87,9 +94,9 @@ router.post("/logedin",async (req, res) => {
 function authtoken(user) {
   var token = jwt.sign(
     { id: user.id },
-    "thesecretkey",
+    // "thesecretkey", 
+    process.env.Jwt_key,                  
     { expiresIn: 50000 })
-    
   return token;
 }
 
@@ -103,7 +110,6 @@ router.get('/users', auth, (req, res) => {
   Users.findById(req.user.id)
     .select("-password")
     .then(user => res.json(user));
-
 });
 
 
