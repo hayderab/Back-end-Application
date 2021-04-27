@@ -7,8 +7,10 @@ const bodyParser = require("body-parser");
 const { findById, findByIdAndUpdate, findByIdAndDelete } = require('../models/users');
 const jwt = require("jsonwebtoken");
 const authRole = require("../permissions/role");
+const {authController, Loggedin} =  require("../controllers/authController")
+// const loggedin =  require("../controllers/authfun")
 
-const auth = require("../strategies/auth_token.js")
+const auth= require("../strategies/auth_token.js")
 const Dogs = require('../models/dogs')
 
 //get route
@@ -17,11 +19,12 @@ const Dogs = require('../models/dogs')
  * @param {*} req 
  * @param {Users} res  
  */
-router.get('/', auth, authRole,function (req, res) {
-  Users.find()
-    .then(Users => res.json(Users))
-    .catch(err => res.status(404).json({ message: err }))
-});
+
+// router.get('/',  auth,function (req, res) {
+//   Users.find()
+//     .then(Users => res.json(Users))
+//     .catch(err => res.status(404).json({ message: err }))
+// });
 
 // get route
 // router.get('/:id', function (req, res) {
@@ -30,6 +33,21 @@ router.get('/', auth, authRole,function (req, res) {
 //     .catch(err => res.status(404).json({ message: err }))
 // });
 
+router.post('/login', authController);
+
+router.get("/logout", (req, res) => {
+  res.clearCookie('token').json({ message: "cookie deleted" })
+})
+
+
+router.post("/loggedin", Loggedin)
+
+
+router.get('/', auth, (req, res) => {
+  Users.findById(req.user.id)
+    .select("-password")
+    .then(user => res.json(user));
+});
 
 //-------------------
 router.post('/', async (req, res) => {
