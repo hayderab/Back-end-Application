@@ -25,9 +25,9 @@ router.post('/createmessage/', async function (req, res) {
               users:[sid, id],
               topic
           });
-      msg.save()
-          .then(msg => res.json(msg))
-          .catch(err = res.json({message:"error creating conversation"}))
+          msg.save()
+        //   .then(msg => res.json(msg))
+        //   .catch(err = res.json({message:"error creating conversation"}))
       }
       const sendMessage = new Messages({
         messsageid:id,
