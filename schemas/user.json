@@ -33,6 +33,10 @@
                     "minLength": 8,
                     "description": "User password"
                 },
+                "favourites": {
+                    "type": "object",
+                    "description": "Add user favaurites"
+                },
                 "dataCreated": {
                     "type": "string",
                     "format": "date-time"
