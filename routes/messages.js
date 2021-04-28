@@ -15,20 +15,9 @@ router.post('/createmessage/', async function (req, res) {
        const {text}  = req.body; // message.. 
        const{topic} = req.body
    
-       console.log("sending message to:", id);
-       console.log("person sending message:", sid);
+      //  console.log("sending message to:", id);
+      //  console.log("person sending message:", sid);
 
-      const msg = await participets.findById(id); 
-      if (!msg){
-          const msg = new participets({
-              // takes sender Id and reciver Id 
-              users:[sid, id],
-              topic
-          });
-          msg.save()
-        //   .then(msg => res.json(msg))
-        //   .catch(err = res.json({message:"error creating conversation"}))
-      }
       const sendMessage = new Messages({
         messsageid:id,
         sender:sid,
