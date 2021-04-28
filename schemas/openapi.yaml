@@ -46,20 +46,6 @@ paths:
               $ref: ./user.json#/definitions/userUpdated
         '400':
           description: User already exists
-    get:
-      tags:
-        - Users
-      description:
-        Get a list of all users.
-      responses:
-        '200':
-          description: List of users
-          content:
-            application/json:
-              schema:
-                $ref:./user.json#/definitions/userList
-        '401':
-          description: Only admin users can list all accounts
 
   /users/{id}:
     parameters:
@@ -104,22 +90,6 @@ paths:
             application/json:
               schema:
                 $ref:./user.json#/definitions/userUpdated
-        '404':
-          description: Not found
-    delete:
-      tags:
-        - Users
-      description:
-        Delete user by id.
-      responses:
-        '200':
-          description: Confirmation of deletion.
-          content:
-            application/json:
-              schema:
-                $ref:./user.json#/definitions/userDeleted
-        '401':
-          description: Only admin users can delete accounts
         '404':
           description: Not found
 
