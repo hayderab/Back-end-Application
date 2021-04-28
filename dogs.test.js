@@ -11,26 +11,9 @@ const unlinkAsync = promisify(fs.unlink)
 
 
 const user = {
-   email: 'unique_email@example.com',
+   email: 'employee@example.com',
    password: 'password'
 }
-
-// describe('POST /user', function() {
-//     it('responds with json', function(done) {
-//       request(app)
-//         .get('/user')
-//         .set('Accept', 'application/json')
-//         .expect('Content-Type', /json/)
-//         .expect(200, done);
-//     });
-//   });
-
-// beforeEach(async() => {
-//   await Users.deleteMany({})
-//   // await Users(user).save();
-//   // console.log("delete the table before posting data")
-// })
-
 
 
 describe('Post new user', () => {
@@ -41,7 +24,7 @@ describe('Post new user', () => {
             firstName:"tester",
             lastName:"jst" , 
             location:"Birmingham",
-            email:'unique_email@example.com', 
+            email:'employee@example.com', 
             sigupcode:"600cem",
             password:"password"
         })
@@ -62,7 +45,6 @@ describe('Post existing user', () => {
           password: user.password
         }).expect(200)
         .then((res) =>{
-          //const cookies = res.headers['set-cookie'][0].split(',').map(item => item.split(';')[0]);
           const cookies = res.headers['set-cookie'][0].split(',').map(item => item.split(';')[0]);
           cookie = cookies.join(';');
           cookie = cookie.replace("token=", ``)
@@ -81,7 +63,7 @@ describe('Post existing user', () => {
     })
 
     // const filePath = `${__dirname}../uploads/dogsTest.jpg`;
-    describe('Post new dog ', () => {
+describe('Post new dog ', () => {
       it('should be able to add dogs', async () => {
         const res = await request(app)
           .post('/api/dogs/')
@@ -99,7 +81,7 @@ describe('Post existing user', () => {
       })
     });
 
-    describe('Update existing dog ', () => {
+describe('Update existing dog ', () => {
       it('should be able to update dogs', async () => {
         const res = await request(app)
           .put(`/api/dogs/update/${id}`)
@@ -112,10 +94,29 @@ describe('Post existing user', () => {
           .attach("imageUrl", './uploads/dogsTest.jpg')
         expect(res.statusCode).toEqual(200)
       })
-
     });
 
-    describe('Delete  existing dog ', () => {
+describe('Add dogs to favourites ', () => {
+      it('should be able to add dogs to fav', async () => {
+        const res = await request(app)
+          .post(`/api/users/addtofav/${id}`)
+          // .set('Cookie', `token=${cookie}`)
+          .set('Cookie', `token=${cookie}`)
+        expect({ message: "Added dogs to favourites" })
+      })
+    });
+
+describe('getting  dogs from favourites ', () => {
+      it('should be able to get favourite dogs', async () => {
+        const res = await request(app)
+          .get(`/api/users/getfav`)
+          // .set('Cookie', `token=${cookie}`)
+          .set('Cookie', `token=${cookie}`)
+        expect(200)
+      })
+    });
+
+describe('Delete  existing dog ', () => {
       it('should be able to delete dogs', async () => {
         const res = await request(app)
           .delete(`/api/dogs/delete/${id}`)
@@ -128,3 +129,11 @@ describe('Post existing user', () => {
         await dogs.deleteMany({})
       });
     });
+
+
+
+
+//reference: extracting cookie from request header https://github.com/visionmedia/supertest/issues/614
+
+
+
