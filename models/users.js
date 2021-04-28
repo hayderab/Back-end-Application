@@ -30,7 +30,7 @@ const userSchema = new Schema({
   },
   sigupcode: {
     type: String, 
-    default: "normaluser",
+    default: "",
     description:"please enter the sigup code"
   },
   password: {
