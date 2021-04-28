@@ -119,8 +119,8 @@ router.put('/update/:id',auth, authRole,locRole,upload.single('imageUrl'), async
 //@desc Delete dogs
 //@access private
 //----------------------------------
-router.delete('/delete/:id',auth, authRole, function (req, res) {
-  dogs.findByIdAndDelete(req.params.id)
+router.delete('/delete/:id',auth, authRole, locRole, async function (req, res) {
+  await dogs.findByIdAndDelete(req.params.id)
   .then(res.status(404).json({message: "deleted"}))
  .catch(err => res.status(403).json({message: err}))
 })

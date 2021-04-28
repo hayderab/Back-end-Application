@@ -13,25 +13,8 @@ const {authController, Loggedin} =  require("../controllers/authController")
 const auth= require("../strategies/auth_token.js")
 const Dogs = require('../models/dogs')
 
-//get route
-/**
- * returning all the users
- * @param {*} req 
- * @param {Users} res  
- */
 
-// router.get('/',  auth,function (req, res) {
-//   Users.find()
-//     .then(Users => res.json(Users))
-//     .catch(err => res.status(404).json({ message: err }))
-// });
 
-// get route
-// router.get('/:id', function (req, res) {
-//   Users.findById(req.params.id)
-//     .then(Users => res.json(Users))
-//     .catch(err => res.status(404).json({ message: err }))
-// });
 
 router.post('/login', authController);
 
@@ -97,7 +80,7 @@ router.post('/', async (req, res) => {
 
 })
 
-router.post('addtofav/:id', auth, async function (req, res) {
+router.post('/addtofav/:id', auth, async function (req, res) {
       
   // console.log(decode.id)
   const uId = userId(req);
