@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "node",
-    "test": "env-cmd ./config/test.env npx jest --detectOpenHandles --verbose",
+    "test": "env-cmd ./config/test.env npx jest --detectOpenHandles --verbose --testTimeout=10000",
     "dev": "env-cmd ./config/dev.env nodemon",
-    "doc": "jsdoc -c jsdoc.conf.json"
+    "doc": "jsdoc -c jsdoc.conf.json", 
+    "elint":"eslint ./"
+
   },
   "repository": {
     "type": "git",
@@ -43,6 +45,8 @@
   },
   "devDependencies": {
     "env-cmd": "^8.0.2",
+    "eslint": "^7.25.0",
+    "eslint-plugin-react": "^7.23.2",
     "jest": "^26.6.3",
     "jsdoc": "^3.6.6",
     "jsdoc-route-plugin": "^0.1.0",
