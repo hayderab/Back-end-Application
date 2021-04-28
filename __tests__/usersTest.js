@@ -51,9 +51,10 @@ let id;
         expect(res.statusCode).toEqual(400)
         // expect(res.body).toHaveProperty("user")
       })
+     
   });
 
- describe('Post new user', () => {
+describe('Post new user', () => {
     it('should not be able to login ', async () => {
       const res = await request(app)
         .post('/api/users/login')
@@ -63,7 +64,7 @@ let id;
         }).expect(400)
       });
     
-    })
+  });
 
    
 
@@ -83,14 +84,14 @@ describe('Post user login', () => {
               process.env.COOKIE = cookie
             })
     });
-    it('should return login signup code false and login true', async () => {
+    it('checking if user logged and have credientials', async () => {
         const res = await request(app)
             .post('/api/users/loggedin')
             .set('Cookie', `token=${cookie}`)
             .expect('Content-Type', /json/)
             .expect({ sigupcode: false, login: true })
     });
-})
+ });
 
 
 // describe('Post adding dogs to fav', () => {
