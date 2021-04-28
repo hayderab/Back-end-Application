@@ -55,7 +55,7 @@ router.post('/', async (req, res) => {
   // body data
   const { firstName, lastName, location, email, sigupcode, password } = req.body;
   //validation
-  if (!firstName || !lastName || !location || !email || !sigupcode || !password) {
+  if (!firstName || !lastName || !location || !email  || !password) {
     return res.status(400).json({ message: "Please enter all feilds" });
   }
   // finding by email 
@@ -97,7 +97,7 @@ router.post('/', async (req, res) => {
 
 })
 
-router.post('/addtofav/:id', auth, async function (req, res) {
+router.post('addtofav/:id', auth, async function (req, res) {
       
   // console.log(decode.id)
   const uId = userId(req);
@@ -126,7 +126,7 @@ router.get('/getfav', auth,  async function (req, res){
   .populate("favorites")
   .select("favorites")
   .then(fav =>{
-    res.json(fav.favorites)
+    res.status(200).json(fav.favorites)
   }).catch(err => res.status(404).json({ message: err }))
   } catch(err){
       res.json({message:"err"})
